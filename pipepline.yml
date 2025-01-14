@@ -1,0 +1,23 @@
+---
+resources:
+  - name: my-java-repo
+    type: git
+    source:
+      uri: https://github.com/iamdatvt94/concourse-demo.git
+      branch: main
+
+jobs:
+  - name: build
+    plan:
+      - get: my-java-repo
+        trigger: true
+      - task: build-task
+        file: my-java-repo/ci/build.yml
+
+  - name: deploy
+    plan:
+      - get: my-java-repo
+        trigger: true
+        passed: [build]
+      - task: deploy-task
+        file: my-java-repo/ci/deploy.yml

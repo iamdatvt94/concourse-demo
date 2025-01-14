@@ -1,0 +1,15 @@
+---
+platform: linux
+image_resource:
+  type: docker
+  source:
+    repository: gradle
+    tag: "7.6-jdk17"
+inputs:
+  - name: my-java-repo
+run:
+  path: /bin/sh
+  args:
+    - -c
+    - |
+      ./gradlew build --no-daemon
