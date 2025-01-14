@@ -1,10 +1,22 @@
 ---
+
+resource_types:
+  - name: docker-image
+    type: registry-image
+    source:
+      repository: concourse/docker-image-resource
+
 resources:
   - name: my-java-repo
     type: git
     source:
       uri: https://github.com/iamdatvt94/concourse-demo.git
       branch: main
+  - name: gradle-image
+    type: docker-image
+    source:
+      repository: gradle
+      tag: "7.6-jdk17"
 
 jobs:
   - name: build
